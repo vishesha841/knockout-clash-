@@ -1,0 +1,28 @@
+using UnityEngine;
+
+public class PlayerAttack : MonoBehaviour
+{
+    public float attackRange = 2f;
+    public int damage = 20;
+    public LayerMask enemyLayer;
+
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(0))   // Left Click Attack
+        {
+            Attack();
+        }
+    }
+
+    void Attack()
+    {
+        RaycastHit hit;
+
+        if (Physics.Raycast(transform.position + Vector3.up, transform.forward, out hit, attackRange, enemyLayer))
+        {
+            EnemyHealth enemy = hit.collider.GetComponent<EnemyHealth>();
+            if (enemy != null)
+                enemy.TakeDamage(damage);
+        }
+    }
+}
