@@ -1,0 +1,29 @@
+using UnityEngine;
+
+public class IceAbility : MonoBehaviour
+{
+    public float glideSpeed = 4f;
+    public GameObject playerModel;   // Assign the visible mesh
+    bool active = false;
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            ToggleIceMode();
+        }
+
+        if (active)
+        {
+            transform.position += transform.forward * glideSpeed * Time.deltaTime;
+        }
+    }
+
+    void ToggleIceMode()
+    {
+        active = !active;
+
+        // Hide or Show the player
+        playerModel.SetActive(!active);
+    }
+}
