@@ -1,0 +1,26 @@
+using UnityEngine;
+
+public class EnemyAI : MonoBehaviour
+{
+    public Transform player;
+    public float moveSpeed = 3f;
+    public float attackDistance = 1.5f;
+    public int attackDamage = 10;
+
+    void Update()
+    {
+        float distance = Vector3.Distance(transform.position, player.position);
+
+        if (distance > attackDistance)
+        {
+            // Move towards player
+            transform.LookAt(player);
+            transform.position += transform.forward * moveSpeed * Time.deltaTime;
+        }
+        else
+        {
+            // Attack player
+            player.GetComponent<PlayerHealth>().TakeDamage(attackDamage);
+        }
+    }
+}
